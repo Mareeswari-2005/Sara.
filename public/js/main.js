@@ -27,6 +27,14 @@ function setupAuth() {
       });
     }
     
+    const logoutNav = document.getElementById('logoutNav');
+    if (logoutNav) {
+      logoutNav.addEventListener('click', (e) => {
+        e.preventDefault();
+        authManager.logout();
+      });
+    }
+    
     return true;
   } else if (isLoginPage) {
     if (authManager.isLoggedIn()) {

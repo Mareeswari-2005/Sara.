@@ -10,9 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-
-  </style>
 </head>
 <body>
   <div class="login-container">
@@ -43,7 +40,12 @@
 
           <div class="login-form-group">
             <label class="login-form-label">Password *</label>
-            <input type="password" id="password" class="login-form-input" required placeholder="Enter your password" minlength="6">
+            <div class="password-input-container">
+              <input type="password" id="password" class="login-form-input password-input" required placeholder="Enter your password" minlength="6">
+              <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                <span class="eye-icon">👁️</span>
+              </button>
+            </div>
           </div>
 
           <div class="login-form-group">
@@ -75,7 +77,12 @@
 
           <div class="login-form-group">
             <label class="login-form-label">Password *</label>
-            <input type="password" id="regPassword" class="login-form-input" required placeholder="Create a password (min. 6 characters)" minlength="6">
+            <div class="password-input-container">
+              <input type="password" id="regPassword" class="login-form-input password-input" required placeholder="Create a password (min. 6 characters)" minlength="6">
+              <button type="button" class="password-toggle" onclick="togglePassword('regPassword')">
+                <span class="eye-icon">👁️</span>
+              </button>
+            </div>
           </div>
 
           <div class="login-form-group">
@@ -102,6 +109,23 @@
   <script src="/js/auth.js"></script>
   <script src="/js/main.js"></script>
   <script>
+    // Password toggle function
+    function togglePassword(inputId) {
+      const passwordInput = document.getElementById(inputId);
+      const eyeIcon = passwordInput.parentElement.querySelector('.eye-icon');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.textContent = '🙈';
+        eyeIcon.style.opacity = '1';
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.textContent = '👁️';
+        eyeIcon.style.opacity = '0.7';
+      }
+    }
+
+    // Form switching
     document.getElementById('showRegister').addEventListener('click', (e) => {
       e.preventDefault();
       document.getElementById('loginForm').style.display = 'none';
@@ -114,6 +138,7 @@
       document.getElementById('loginForm').style.display = 'block';
     });
 
+    // Login form submission
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       
@@ -159,6 +184,7 @@
       }
     });
 
+    // Register form submission
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       

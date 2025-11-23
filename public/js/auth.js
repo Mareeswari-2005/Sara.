@@ -17,14 +17,14 @@ const authManager = {
     return !!this.getToken() && !!this.getCurrentUser();
   },
 
- 
-
-logout() {
+  logout() {
+    localStorage.removeItem('sara_user');
+    localStorage.removeItem('sara_token');
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
-    sessionStorage.removeItem('splashShown'); 
-    window.location.href = '/';
-}
+    sessionStorage.removeItem('splashShown');
+    window.location.href = '/login';
+  }
 };
 
 window.authManager = authManager;
